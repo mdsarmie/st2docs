@@ -5,15 +5,15 @@ SSH Troubleshooting
 file (``/etc/st2/st2.conf``) to authenticate to remote boxes. The default username is ``stanley``,
 and the default ``ssh_key_file`` is ``/home/stanley/.ssh/stanley_rsa``.
 
-This can be changed by modifying those values in ``/etc/st2/st2.conf``.
+This can be changed by modifying the configuration values in ``/etc/st2/st2.conf``.
 
-In case of key compromise, revoking the public key for ``system_user`` from target boxes will
+In case of key compromise occurring, revoking the public key for ``system_user`` from target boxes will
 revoke access for |st2|. 
 
 .. note::
 
   If you are changing ``system_user`` or ``ssh_key_file`` configuration values in
-  ``/etc/st2/st2.conf``, you must restart |st2| to pick up the changes. You can just
+  ``/etc/st2/st2.conf``, you must restart |st2| for your changes to take effect. You can just
   restart the st2actionrunner component, e.g. ``sudo service st2actionrunner restart``.
 
 To validate remote actions are working correctly, you can use the following command:
@@ -35,7 +35,7 @@ To validate remote actions are working correctly, you can use the following comm
         }
     }
 
-If you don't have the right SSH key file, you will see an error and the action will fail:
+If you do not have the right SSH key file, you will see an error and the action will fail:
 
 .. code-block:: bash
 
@@ -89,7 +89,7 @@ runner boxes, and add the following configuration lines in ``/etc/st2/st2.conf``
 
 We do not recommend running actions as arbitrary user + private_key combinations. This
 would require you to setup private_key for the users on |st2| action runner boxes and
-the public keys of the users in target boxes. This increases the risk surface area and
+the public keys of the users in target boxes. This will increase the risk surface area and 
 is discouraged.
 
 However, if you have st2client installed and want to run one-off commands on remote
@@ -113,7 +113,7 @@ boxes as a different user, you can use:
   }
 
 For the above example to work, the key file ``/home/stanley/ssh_keys/.ssh/id_rsa`` has to be
-available on action runner boxes. We also support ``password`` as a parameter. As of version 2.1,
+available on the action runner boxes. We also support ``password`` as a parameter. As of version 2.1,
 you can also specify custom keys for hosts via SSH config file. A sample SSH config is shown below:
 
 .. code-block:: ini
@@ -126,7 +126,7 @@ you can also specify custom keys for hosts via SSH config file. A sample SSH con
       port 55
 
 If you are running remote actions as ``sudo``, pseudo tty is enabled by default. This means
-that ``stdout`` and ``stderr`` streams get combined into one and reported as ``stdout``.
+that ``stdout`` and ``stderr`` streams will be combined into one and reported as ``stdout``.
 
 When using a bastion host for running remote actions, the bastion host must have ``AllowTcpForwarding``
 enabled. Additionally, the connection to the bastion host is made using the parameters provided for
